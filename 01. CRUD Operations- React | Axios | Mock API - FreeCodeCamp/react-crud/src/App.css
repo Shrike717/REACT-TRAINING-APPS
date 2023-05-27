@@ -15,16 +15,31 @@
     src: url('./assets/fonts//montserrat-v25-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
 
+  .centered {
+    text-align: center;
+  }
 
 .main {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-    background-color: #000000;
-    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #212121;
+    color: whitesmoke;
+    flex-direction: column;
 }
 
-.main-header{
+.main__header{
     font-family: 'Montserrat', sans-serif;
+  }
+
+  .create-form label{
+    color: whitesmoke !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px !important;
+  }
+
+  .table__table-header,
+  .table__table-body  {
+    text-align: center;
   }
