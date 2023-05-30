@@ -1,4 +1,7 @@
-
+.top-secion {
+    display: flex;
+    gap: .5rem;
+}
 .card-group {
     margin-top: 1rem !important;
 }

@@ -84,6 +84,7 @@ const MealDetails = ({ mealId, onBackButtonClick }) => {
 				</Grid.Row>
 				<Grid.Row columns={1}>
 					<Grid.Column>
+                        <p>My test for gid columns</p>
 						<p>
 							Et eu nulla id nisi incididunt labore voluptate elit
 							anim esse deserunt consequat enim. Ut magna aute

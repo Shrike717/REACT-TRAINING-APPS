@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import "./App.css";
 import {
 	Container,
@@ -16,10 +16,10 @@ import MealCard from "./components/MealCard";
 import MealDetails from "./components/MealDetails";
 
 function App() {
-	const [currentCategory, setCurrentCategory] = useState(0);
-	const [selectedMealId, setSelectedMealId] = useState(null);
-	const [searchTerm, setSearchTerm] = useState("");
-	const [isSearch, setSearch] = useState(false);
+	const [currentCategory, setCurrentCategory] = useState(0); // Needed for Dropdown cattegories
+	const [selectedMealId, setSelectedMealId] = useState(null); // Neeeded to fetch one meal
+	const [searchTerm, setSearchTerm] = useState(""); // Needed to save searchTerm
+	const [isSearch, setSearch] = useState(false); // needed to set search  status for coditional  rendering
 
 	// Fetches Categories from API
 	const {
@@ -41,12 +41,12 @@ function App() {
 			};
 		});
 		console.log(result);
-		return result; // Stores rresults in a temp variable named categories
+		return result; // Stores results in a temp variable named categories
 	});
 
 	// Fetches meals in categories from API
 	const { data: meals } = useQuery(
-		["meals", currentCategory, categories], // Array is made to extract the query parameter for category and append it dynamiically
+		["meals", currentCategory, categories], // Array is made to extract the query parameter for category and append it dynamically
 		async (key) => {
 			const currentCategory = key.queryKey[1];
 			const category = key.queryKey[2][currentCategory].text;
@@ -114,7 +114,21 @@ function App() {
 				/>
 			) : (
 				<Fragment>
-					<div className="row">
+					<div className="top-secion row">
+						<Dropdown
+							className="drop-down"
+							placeholder="Filter Category"
+							fluid
+							search
+							selection
+							value={categories[currentCategory].value}
+							onChange={(e, { value }) => {
+                                // console.log(value); // Value is a string!!
+								setCurrentCategory(value - 1); // I removed the [0] after value! Now it shows all categories
+								setSearchTerm("");
+							}}
+							options={categories}
+						/>
 						<Input
 							className="search-input"
 							size="large"
@@ -125,19 +139,6 @@ function App() {
 						<Button onClick={onSearch} secondary>
 							Search
 						</Button>
-						<Dropdown
-							className="drop-down"
-							placeholder="Filter Category"
-							fluid
-							search
-							selection
-							value={categories[currentCategory].value}
-							onChange={(e, { value }) => {
-								setCurrentCategory(value[0] - 1);
-                                setSearchTerm("");
-							}}
-							options={categories}
-						/>
 					</div>
 
 					<Container className="container" textAlign="center">
